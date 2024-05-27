@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OverlayService } from './shere/overlay.service';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'my-posts-app';
+  constructor(private overlayService: OverlayService) {}
+
   ngOnInit(): void {
     window.addEventListener('keyup', (e) => {
       if (e.key === 'PrintScreen') {
+        this.overlayService.showOverlay();
         alert("Don't take a screenshot!");
         navigator.clipboard.writeText('');
+        setTimeout(() => this.overlayService.hideOverlay(), 1000); // Hide after 1 second
       }
     });
 

@@ -15,7 +15,7 @@ export class PreventCopyPasteDirective {
   @HostListener('document:keyup', ['$event'])
   handlePrintScreen(event: KeyboardEvent) {
     if (event.key === 'PrintScreen') {
-      alert('Screenshots are disabled.');
+      alert("Don't take a screenshot!");
       navigator.clipboard.writeText('');
     }
   }
@@ -24,5 +24,13 @@ export class PreventCopyPasteDirective {
   handleCopy(event: ClipboardEvent) {
     event.preventDefault();
     alert('Copying text is disabled.');
+    console.log('Copying text is not allowed.');
+  }
+
+  @HostListener('cut', ['$event'])
+  handleCut(event: ClipboardEvent) {
+    event.preventDefault();
+    alert('Cutting text is disabled.');
+    console.log('Cutting text is not allowed.');
   }
 }
